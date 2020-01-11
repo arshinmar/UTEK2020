@@ -1,1 +1,24 @@
 hey there
+Hey matthew
+djsdn
+hksdjhfkjdshfkjsdhfkjsdhfkjdshfkjdshfkjdshfjkjkh
+
+# UTEK2020
+Main repository for UTEK 2020. Created by Arsh Kadakia, Sean Wu, Ben Natra, Matthew Leung
+
+#Build/run Instructions
+Enter in command line ```python <scriptname>.py <filename>.in```
+
+#Prerequsites
+Standard Python libraries, nothing else is needed.
+
+
+# Part 2 Checklist
+1. Compute DP matrix
+2. Create function to process DP matrix (deal with paths)
+
+#Part 3 Checklist
+1. Figure out mapping of books to letters for
+2. Compute DP matrix
+3. String Comparison (w/ hash?)
+4. Determine batching methods for finding optimal method
