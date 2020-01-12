@@ -55,6 +55,13 @@ def makehash(oa, da):
     return [ht, new_oa, new_da]
 #-------------------------------------------------------------------------------
 def compute_DP_matrix(s1, s2):
+    """
+    INPUT
+    ::array:: s1
+    ::array:: s2
+    OUTPUT
+    ::2D array:: dp
+    """
     m=len(s1)
     n=len(s2)
     # Create a table to store results of subproblems
