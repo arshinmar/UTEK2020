@@ -36,7 +36,19 @@ Download all the necessary files, and type into command line:
 When the initial input file ```<input_file>.in``` was parsed, the names of the books were placed in a hash table for quick access. Each book was assigned an integer key. Our algorithm needed to compare whether or not two books were equal, and since comparisons between integers are faster than comparisons between strings, a hash table was used.
 
 ### Example
-To rearrange the string ```kitten``` into ```sitting```, our model would output:
+To rearrange the string ```kitten``` into ```sitting```, our model gives a corresponding ```dp``` matrix of:
+```
+      s  i  t  t  i  n  g
+  [0, 1, 2, 3, 4, 5, 6, 7]
+k [1, 1, 2, 3, 4, 5, 6, 7]
+i [2, 2, 1, 2, 3, 4, 5, 6]
+t [3, 3, 2, 1, 2, 3, 4, 5]
+t [4, 4, 3, 2, 1, 2, 3, 4]
+e [5, 5, 4, 3, 2, 2, 3, 4]
+n [6, 6, 5, 4, 3, 3, 2, 3]
+```
+
+After determining the most optimal path, the output is:
 ```
 Replace 0, ‘s’
 Replace 4, ‘i’
