@@ -105,18 +105,21 @@ def process_DP_matrix(s1, s2, dp):
 
         # check for replacement case
         elif dp[i][j] == dp[i-1][j-1] + 1:
-            actions.insert(0, [REPLACEMENT_ID, i-1, s2[j-1]])
+            #actions.insert(0, [REPLACEMENT_ID, i-1, s2[j-1]])
+            actions.insert(0, [REPLACEMENT_ID, i, s2[j]])
             i -= 1
             j -= 1
 
         # check for deletion case
         elif dp[i][j] == dp[i-1][j] + 1:
-            actions.insert(0, [DELETION_ID, i-1, "not applicable"])
+            actions.insert(0, [DELETION_ID, i, "not applicable"])
+            #actions.insert(0, [DELETION_ID, i-1, "not applicable"])
             i -= 1
 
         # check for insertion case
         elif dp[i][j] == dp[i][j-1] + 1:
-            actions.insert(0, [INSERTION_ID, j-1, s2[j-1]])
+            actions.insert(0, [INSERTION_ID, j, s2[j]])
+            #actions.insert(0, [INSERTION_ID, j-1, s2[j-1]])
             j -= 1
     print('All paths',actions)
     return actions
@@ -142,12 +145,15 @@ def get_best_path(all_paths):
             if cost<best:
                 best=cost
                 best_path_id=i
-    print('Best path',all_paths[i])
-    return all_paths[i]
+    print('Best path',all_paths)
+    return all_paths
 
 def print_best_path(path_segments):
     # path_segments is a list of segments of consective actions of same type
+    #INPUT:
     # [[action_id, start_idx, end_idx, books], [...], [...], ...]
+    #OUTPUT:
+    #best_path is an array of strings
     best_path = []
 
     for seg in path_segments:
@@ -170,6 +176,7 @@ def print_best_path(path_segments):
 def generate2(main_path,ht):
     # remember to call generate with a list of actions like below
     #actions = ['Insert​ ​0-0​, ​"Religion and Mythology, Neil Potts"','Delete​ ​2-3','Insert​ ​3-4​, ​"Foundation, Isaac Asimov"​ ​"Intro to Algorithms, Thomas Cormen"']
+    # Format of Path1: [[ActionID,Index,Character],[...],[...]]
     previous_action=0
     final=[]
     temp=[]
@@ -191,13 +198,11 @@ def generate2(main_path,ht):
                 for i in range(start_index,end_index,1):
                     temp+=[main_path[i][2]]
                 final+=[temp]
-    print(final)
-    return final
 
     #Convert back to book names
     for i in range(0,len(final),1):
         for idx in range(3, len(final[i]),1):
             num = final[i][idx]
             final[i][idx] = ht[num][1]
-    print('Printed best path generate2',best_path)
+    print('Printed best path generate2',final)
     return print_best_path(final)
