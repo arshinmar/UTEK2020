@@ -51,9 +51,8 @@ def makehash(oa, da):
             new_da += [ht_idx] #add to the new array
             ht_idx += 1 #increment ht index
         exists = False
-
+    print('Hash',ht)
     return [ht, new_oa, new_da]
-
 #-------------------------------------------------------------------------------
 def compute_DP_matrix(s1, s2):
     m=len(s1)
@@ -78,6 +77,7 @@ def compute_DP_matrix(s1, s2):
                 substitutionCost = 1
 
             dp[i][j] = min(dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] + substitutionCost)
+    print('DP matrix',dp)
     return dp
 
 def process_DP_matrix(s1, s2, dp):
@@ -111,7 +111,7 @@ def process_DP_matrix(s1, s2, dp):
         elif dp[i][j] == dp[i][j-1] + 1:
             actions.insert(0, [INSERTION_ID, j-1, s2[j-1]])
             j -= 1
-
+    print('All paths',actions)
     return actions
 
 def get_best_path(all_paths):
@@ -135,6 +135,7 @@ def get_best_path(all_paths):
             if cost<best:
                 best=cost
                 best_path_id=i
+    print('Best path',all_paths[i])
     return all_paths[i]
 
 def print_best_path(path_segments):
@@ -156,7 +157,7 @@ def print_best_path(path_segments):
 
         elif seg[0] == REPLACEMENT_ID:
             best_path.insert(0, 'Replace %d-%d, %s' % (seg[1], seg[2], books) )
-
+    print('Printed best path',best_path)
     return best_path
 
 def generate2(main_path,ht):
@@ -183,6 +184,7 @@ def generate2(main_path,ht):
                 for i in range(start_index,end_index,1):
                     temp+=[main_path[i][2]]
                 final+=[temp]
+    print(final)
     return final
 
     #Convert back to book names
@@ -190,5 +192,5 @@ def generate2(main_path,ht):
         for idx in range(3, len(final[i]),1):
             num = final[i][idx]
             final[i][idx] = ht[num][1]
-
+    print('Printed best path generate2',best_path)
     return print_best_path(final)
