@@ -10,11 +10,14 @@ if __name__ == "__main__":
 
     original_list,desired_list = parse(filename)
     temp = makehash(original_list, desired_list)
+    print(temp)
     ht = temp[0]
     new_original_list = temp[1]
     new_desired_list = temp[2]
     final = compute_DP_matrix(new_original_list, new_desired_list)
+    print(final)
     final2 = process_DP_matrix(new_original_list,new_desired_list,final)
+    print(final2)
     #best = get_best_path(final2)
     best2 = generate2(final2[0],ht)
 
