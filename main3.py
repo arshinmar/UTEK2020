@@ -15,10 +15,10 @@ if __name__ == "__main__":
     new_desired_list = temp[2]
     dp = compute_DP_matrix(new_original_list, new_desired_list)
     print(dp)
-    final2 = process_DP_matrix(new_original_list,new_desired_list,dp)
-    print(final2)
+    actions = process_DP_matrix(new_original_list,new_desired_list,dp)
+    print(actions)
     #best = get_best_path(final2)
-    best2 = generate2(final2[0],ht)
+    best2 = generate2(actions[0],ht)
 
     # write to file
     with open(filename[0:len(filename)-3] + ".out" , "w") as output_file:
