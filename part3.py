@@ -87,7 +87,7 @@ def compute_DP_matrix(s1, s2):
     print('DP matrix',dp)
     return dp
 
-def process_DP_matrix(s1, s2, dp):
+'''def process_DP_matrix(s1, s2, dp):
     # get lengths of the 2 strings
     i = len(s1)
     j = len(s2)
@@ -122,6 +122,46 @@ def process_DP_matrix(s1, s2, dp):
             #actions.insert(0, [INSERTION_ID, j-1, s2[j-1]])
             j -= 1
     print('All paths',actions)
+    return actions'''
+
+def process_DP_matrix(s1, s2, dp):
+    # get lengths of the 2 strings
+    i = len(s1)
+    j = len(s2)
+
+    # initialize array to store actions
+    actions = []
+
+    # traverse DP_matrix to get actions
+    while (i >= 0 and j >= 0):
+
+        # check if characters are the same (i.e. do nothing)
+        if s1[i-1] == s2[j-1]:
+            i -= 1
+            j -= 1
+
+        # check for replacement case
+        elif dp[i][j] == dp[i-1][j-1] + 1:
+            actions.insert(0, [REPLACEMENT_ID, i-1, s2[j-1]])
+            #actions.insert(0, 'Replace %d, \'%c\'' % (i-1, s2[j-1]) )
+            #actions.append('Replace %d, \'%c\'' % (i-1, s2[j-1]) )
+            i -= 1
+            j -= 1
+
+        # check for deletion case
+        elif dp[i][j] == dp[i-1][j] + 1:
+            actions.insert(0, [DELETION_ID, i-1, "not applicable"])
+            #actions.insert(0, 'Delete %d' % (i-1) )
+            #actions.append('Delete %d' % (i-1) )
+            i -= 1
+
+        # check for insertion case
+        elif dp[i][j] == dp[i][j-1] + 1:
+            actions.insert(0, [INSERTION_ID, j-1, s2[j-1]])
+            #actions.insert(0, 'Insert %d, \'%c\'' % (j-1, s2[j-1]) )
+            #actions.append('Insert %d, \'%c\'' % (j-1, s2[j-1]) )
+            j -= 1
+
     return actions
 
 def get_best_path(all_paths):
