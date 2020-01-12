@@ -10,9 +10,16 @@ if __name__ == "__main__":
     original_string, desired_string = modified_parse(filename)
 
     dp = compute_DP_matrix(original_string, desired_string)
+    print(dp)
     actions = process_DP_matrix(original_string, desired_string, dp)
+
+    #print(actions)
+
+    sorted_actions = batch_sort_actions(actions)
+    formatted_actions = format_actions(sorted_actions)
 
     # write to file
     with open(filename[0:len(filename)-3] + ".out" , "w") as output_file:
-        for action in actions:
+        for action in formatted_actions:
+            #output_file.write(str(action) + "\n")
             output_file.write(action + "\n")
