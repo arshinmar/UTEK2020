@@ -1,5 +1,5 @@
 # UTEK2020
-Main repository for UTEK 2020 Competition.
+Main repository for our submission to the UTEK 2020 Programming Competition. The submission received 3rd place in the competition.
 
 ### Team
 Arsh Kadakia, Sean Wu, Ben Natra, Matthew Leung
