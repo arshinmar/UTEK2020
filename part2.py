@@ -1,27 +1,45 @@
-# Part 2
-#Insertion followed by deletion is the same as replacement
-#Insertion and deletion both modify the length of the string.
-    # Replacement doesnt.
-#Multiple solutions exist.
+"""This Python file contains helper functions using the Wagner-Fisher Algorithm
+to determine the least number of moves (insertions, deletions, replacements) to
+convert a string into another desired string.
+
+The Wagner-Fisher Algorithm is used to determine the minimum edit distance and
+the corresponding moves. This is accomplished by tracking changes in a matrix
+which is then traversed to determine the moves. Note that a replacement is
+equivalent to a deletion followed by an insertion, but is still considered to be
+a single move.
+
+Convention:
+
+Insert​ <​index​>, ​‘<char>’
+Inserts ​<char> a​t the given ​<index>.​ For eg. I​nsert 1, ‘c’​ on “brain” gives
+“bcrain”.
+
+Delete​ <​index​>
+Deletes the character at the given ​<index>​.
+
+Replace​ <​index​>, ​‘<new-char>’
+Replaces character at ​<index>​ with ​<new-char>​.
+"""
 
 # Constants
 INSERTION_ID = 1
 DELETION_ID = 2
 REPLACEMENT_ID = 3
 
-# parser function for part 2 only
 def modified_parse(input_file_path):
-    """
-    INPUT:
-    ::str:: input_file_path
-    OUTPUT:
-    ::str:: original_string
-    ::str:: desired_string
+    """Parses the original and desired strings from an input file
+
+    Args:
+        input_file_path (str): path to input file with two strings on separate
+        lines
+
+    Returns:
+        A tuple containing the original and desired string
     """
     try:
         file1 = open(input_file_path, "r+")
     except:
-        return ["",""]
+        return ("", "")
 
     original_string = file1.readline()[0:-1]
     desired_string = file1.readline()[0:-1]
@@ -30,22 +48,33 @@ def modified_parse(input_file_path):
     return original_string, desired_string
 
 def compute_DP_matrix(s1, s2):
-    m=len(s1)
-    n=len(s2)
-    # Create a table to store results of subproblems
+    """Generates dp matrix to store potential sets of actions to change the
+    original string into the desired string
+
+    Args:
+        s1 (str): original string
+        s2 (str): desired string
+
+    Returns:
+        A 2D list representation of the dp matrix
+    """
+    m = len(s1)
+    n = len(s2)
+    # Create a table to store results of subproblems. The original and desired
+    # strings correspond with the columns and rows respectively.
     dp = []
-    for i in range(0,m+1,1):
+    for i in range(0, m+1, 1):
         dp += [[]]
-        for j in range(0,n+1,1):
+        for j in range(0, n+1, 1):
             dp[i] += [0]
 
-    for i in range(1,m+1,1):
+    for i in range(1, m+1, 1):
         dp[i][0] = i
-    for j in range(1,n+1,1):
+    for j in range(1, n+1, 1):
         dp[0][j] = j
 
-    for j in range(1,n+1,1):
-        for i in range(1,m+1,1):
+    for j in range(1, n+1, 1):
+        for i in range(1, m+1, 1):
             if s1[i-1] == s2[j-1]:
                 substitutionCost = 0
             else:
@@ -55,124 +84,127 @@ def compute_DP_matrix(s1, s2):
     return dp
 
 def process_DP_matrix(s1, s2, dp):
-    # get lengths of the 2 strings
+    """Traverses dp matrix from the bottom right corner to the top left corner
+    to determine the set of the least number of actions to convert the original
+    string into the desired string
+
+    Args:
+        s1 (str): original string
+        s2 (str): desired string
+        dp (list): 2D list containing the dp matrix
+
+    Returns:
+        A 2D list of actions [[Action1],[Action2],...]. Each action is a list of
+        the format [ActionID,Index,Character].
+    """
     i = len(s1)
     j = len(s2)
 
-    # initialize array to store actions
+    # Initialize array to store actions corresponding with minimum edit distance
     actions = []
 
-    # traverse DP_matrix to get actions
+    # Traverse DP_matrix to get actions up to and including when the top left
+    # corner is reached.
     while (i >= 0 and j >= 0):
 
-        # check if characters are the same (i.e. do nothing)
+        # Check if characters are the same (i.e. do nothing)
         if s1[i-1] == s2[j-1]:
             i -= 1
             j -= 1
 
-        # check for replacement case
+        # Check for replacement case
         elif dp[i][j] == dp[i-1][j-1] + 1:
             actions.insert(0, [REPLACEMENT_ID, i-1, s2[j-1]])
-            #actions.insert(0, 'Replace %d, \'%c\'' % (i-1, s2[j-1]) )
-            #actions.append('Replace %d, \'%c\'' % (i-1, s2[j-1]) )
             i -= 1
             j -= 1
 
-        # check for deletion case
+        # Check for deletion case
         elif dp[i][j] == dp[i-1][j] + 1:
             actions.insert(0, [DELETION_ID, i-1, "not applicable"])
-            #actions.insert(0, 'Delete %d' % (i-1) )
-            #actions.append('Delete %d' % (i-1) )
             i -= 1
 
-        # check for insertion case
+        # Check for insertion case
         elif dp[i][j] == dp[i][j-1] + 1:
-            actions.insert(0, [INSERTION_ID, j-1, s2[j-1]])
-            #actions.insert(0, 'Insert %d, \'%c\'' % (j-1, s2[j-1]) )
-            #actions.append('Insert %d, \'%c\'' % (j-1, s2[j-1]) )
+            actions.insert(0, [INSERTION_ID, i, s2[j-1]])
+            j -= 1
+
+        # Edge case where the first letter of each word (top left corner of dp)
+        # are the same. This is required to avoid an infinite loop.
+        else:
+            i -= 1
             j -= 1
 
     return actions
 
 def batch_sort_actions(actions):
-    # gets a list of actions
+    """Sorts actions obtained from dp matrix such that the correct indices for
+    each action are respected. This ensures that the final set of actions
+    actually changes the original string into the desired string.
+
+    Args:
+        actions (list): 2D list of actions [[Action1],[Action2],...] where each
+        action is a list of the format [ActionID,Index,Character]
+
+    Returns:
+        A 2D list of actions [[Action1],[Action2],...].
+    """
     processed_actions = []
-    unsorted_insertion_deletions = []
-    sorted_insertion_deletions = []
+    insertion_deletion_dict = {}
 
-
+    # Since replacements do not affect indices, all of the replacments should be
+    # performed first. Therefore they should also be stored first since they
+    # require no further processing.
     for action in actions:
         if action[0] == REPLACEMENT_ID:
             processed_actions += [action]
-            print("here start")
-            print(len(actions))
-            actions.remove(action)
-            print(len(actions))
-            print("hi")
-            print("here end")
-            print(action)
         else:
-            unsorted_insertion_deletions += [action]
+            # Since insertions and deletions affect indices, they are stored
+            # into a dictionary where the action's index is the key and the
+            # value is a list containing the action. The dictionary allows
+            # actions affecting the same index to be stored together
+            if action[1] not in insertion_deletion_dict:
+                insertion_deletion_dict[action[1]] = [action]
+            else:
+                insertion_deletion_dict[action[1]].append(action)
 
-    print("unsorted")
-    print(actions)
+    # Since insertions and deletions at higher indices do not affect the
+    # positions of lower indices, they should be performed first and thus be put
+    # in the processed_actions before actions at lower indices.
 
-    # sort remaining actions (only deletions and insertions) by the index they affect
-    sorted_insertion_deletions = sorted(unsorted_insertion_deletions, key = lambda x: x[1])
+    # Also note that if multiple actions are meant to be performed at the same
+    # index, the first action will affect the indices of the future actions.
+    # Thus, the later insertions/deletions should once again be performed first.
 
-# check here
-
-#    for i, remaining_action in enumerate(sorted_insertion_deletions):
-#        if remaining_action[1] == INSERTION_ID:
-#            for x in range(i+1, len(sorted_insertion_deletions)):
-#                sorted_insertion_deletions[x][1] += 1 # insertion pushes indices up
-#        elif remaining_action[1] == DELETION_ID:
-#            for x in range(i+1, len(sorted_insertion_deletions)):
-#                sorted_insertion_deletions[x][1] -= 1 # insertion pushes indices up
-#        print(i)
-#        print(remaining_action)
-
-    #for remaining_action in sorted_insertion_deletions:
-    #    if remaining_action[0] == INSERTION_ID:
-
-    #    insertion_deletions += [action]
-
-    print("only replaces")
-    print(processed_actions)
-    processed_actions += sorted_insertion_deletions
-
-    print("all the stuff")
-    print(processed_actions)
+    for index in reversed(sorted(insertion_deletion_dict.keys())):
+        # Store the actions at each index in reversed order
+        processed_actions += reversed(insertion_deletion_dict[index])
 
     return processed_actions
 
-#   all replacements move to the top & merge
-#   sort all inserts and deletes by index
-#   update index +1 for insert
-#   update index -1 for delete
 
-def format_actions(path_segments):
-    # path_segments is a list of segments of consective actions of same type
-    # [[action_id, start_idx, end_idx, books], [...], [...], ...]
+def format_actions(actions):
+    """Formats actions into the required convention.
+
+    Args:
+        actions (list): 2D list of actions [[Action1],[Action2],...] where each
+        action is a list of the format [ActionID,Index,Character]
+        
+    Returns:
+        A list of strings corresponding to each action. Each string is of the
+        form "Insert​ <​index​>, ​‘<char>’", "Delete​ <​index​>", or
+        "Replace​ <​index​>, ​‘<new-char>’"
+    """
     best_path = []
 
-    for seg in path_segments:
+    for action in actions:
 
-        if seg[0] == INSERTION_ID:
-            best_path.append('Insert %d, \'%c\'' % (seg[1], seg[2]) )
-            #best_path.insert(0, 'Insert %d-%d, %s' % (seg[1], seg[2], books) )
-            #actions.append('Insert %d, \'%c\'' % (j-1, s2[j-1]) )
+        if action[0] == INSERTION_ID:
+            best_path.append('Insert %d, \'%c\'' % (action[1], action[2]))
 
-        elif seg[0] == DELETION_ID:
-            best_path.append('Delete %d' % (seg[1]) )
-            #best_path.insert(0, 'Delete %d-%d' % (seg[1], seg[2]) )
-            #actions.append('Delete %d' % (i-1) )
+        elif action[0] == DELETION_ID:
+            best_path.append('Delete %d' % (action[1]))
 
-        elif seg[0] == REPLACEMENT_ID:
-            best_path.append('Replace %d, \'%c\'' % (seg[1], seg[2]) )
-            #best_path.insert(0, 'Replace %d-%d, %s' % (seg[1], seg[2], books) )
-            #actions.append('Replace %d, \'%c\'' % (i-1, s2[j-1]) )
-
-    print(best_path)
+        elif action[0] == REPLACEMENT_ID:
+            best_path.append('Replace %d, \'%c\'' % (action[1], action[2]))
 
     return best_path
