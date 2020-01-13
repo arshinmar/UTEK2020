@@ -54,3 +54,21 @@ Replace 0, ‘s’
 Replace 4, ‘i’
 Insert 6, ‘g’
 ```
+
+## Project Structure
+The competition was broken up into 3 parts. Each part has its own designated python file for relevant functions and its own main file to execute the code. The test input files are also provided in this repository along with our outputs.
+
+```
+├── An_Analysis_Post-Mortem.pdf
+├── README.md
+├── main1.py
+├── main2.py
+├── main3.py
+├── part1.py
+├── part2-input/
+├── part2-output/
+├── part2.py
+├── part3-input/
+├── part3.py
+└── utek2020_programming_package.pdf
+```
