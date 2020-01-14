@@ -1,19 +1,19 @@
 Replace 1, 'e'
-Insert 3, 't'
-Insert 4, 'i'
 Replace 3, 'c'
 Replace 4, 'r'
-Delete 8
 Replace 9, 's'
 Replace 10, 'l'
-Delete 15
-Delete 16
-Delete 17
 Replace 18, 'm'
-Insert 19, 'n'
-Delete 30
-Insert 34, 'n'
 Replace 36, 'n'
 Replace 37, 'o'
 Replace 48, 'd'
 Delete 50
+Insert 36, 'n'
+Delete 30
+Insert 21, 'n'
+Delete 17
+Delete 16
+Delete 15
+Delete 8
+Insert 3, 'i'
+Insert 3, 't'

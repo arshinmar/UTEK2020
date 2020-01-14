@@ -5,13 +5,9 @@ Replace 4, 'v'
 Replace 7, 'i'
 Replace 8, 'n'
 Replace 9, 'e'
-Delete 16
 Replace 18, 'a'
 Replace 19, 'r'
-Insert 21, 'n'
 Replace 22, 't'
-Insert 24, 's'
-Insert 27, 'c'
 Replace 27, 'e'
 Replace 30, 'x'
 Replace 31, 'c'
@@ -21,6 +17,10 @@ Replace 34, 'p'
 Replace 35, 'i'
 Replace 36, 'd'
 Replace 40, 't'
-Delete 43
-Delete 45
 Delete 50
+Delete 45
+Delete 43
+Insert 26, 'c'
+Insert 24, 's'
+Insert 22, 'n'
+Delete 16
