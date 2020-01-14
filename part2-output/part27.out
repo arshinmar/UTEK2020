@@ -1,99 +1,49 @@
 Replace 0, 'g'
 Replace 1, 'a'
 Replace 7, 'a'
-Insert 11, 'c'
 Replace 11, 'c'
 Replace 16, 'a'
-Delete 20
 Replace 26, 'a'
 Replace 27, 'g'
-Insert 29, 't'
 Replace 29, 'a'
-Delete 33
-Delete 35
-Delete 37
-Delete 40
 Replace 44, 'g'
 Replace 50, 'a'
-Insert 52, 'g'
 Replace 55, 'a'
-Insert 56, 't'
 Replace 59, 'a'
 Replace 60, 'g'
 Replace 61, 'a'
-Insert 67, 'a'
-Insert 77, 'a'
-Delete 81
-Delete 90
 Replace 91, 'c'
-Delete 95
 Replace 97, 'a'
 Replace 98, 't'
-Delete 100
-Insert 105, 'g'
 Replace 111, 'c'
 Replace 112, 'a'
 Replace 114, 'a'
 Replace 115, 'a'
 Replace 116, 'c'
-Insert 126, 'c'
-Insert 129, 'a'
-Insert 130, 't'
 Replace 131, 'a'
-Insert 150, 't'
-Insert 157, 'a'
-Insert 158, 'c'
 Replace 157, 'a'
 Replace 158, 'g'
 Replace 164, 'g'
-Insert 170, 'g'
-Delete 174
-Insert 192, 'a'
 Replace 189, 'a'
 Replace 192, 'c'
-Delete 196
-Insert 210, 'c'
-Insert 211, 't'
-Insert 214, 'c'
-Insert 216, 'a'
-Insert 218, 'g'
 Replace 210, 'g'
 Replace 211, 't'
 Replace 213, 't'
 Replace 217, 'a'
 Replace 219, 'a'
 Replace 220, 'c'
-Insert 232, 'g'
 Replace 223, 'c'
-Delete 239
-Delete 243
-Delete 247
-Delete 249
-Delete 262
-Delete 263
-Delete 264
-Delete 266
 Replace 271, 'g'
 Replace 272, 'a'
 Replace 273, 't'
 Replace 275, 'a'
-Delete 277
-Delete 279
-Delete 281
-Delete 287
-Delete 288
-Delete 289
-Delete 290
 Replace 293, 'c'
 Replace 295, 'c'
 Replace 296, 't'
 Replace 298, 'c'
-Delete 300
 Replace 302, 'g'
 Replace 306, 't'
 Replace 307, 'g'
-Delete 315
-Delete 316
 Replace 319, 'a'
 Replace 320, 'g'
 Replace 322, 'a'
@@ -101,9 +51,59 @@ Replace 326, 'a'
 Replace 328, 't'
 Replace 329, 'a'
 Replace 330, 't'
-Insert 327, 'c'
 Replace 335, 'a'
 Replace 336, 'g'
 Replace 337, 'g'
-Delete 342
 Replace 343, 't'
+Delete 342
+Insert 335, 'c'
+Delete 316
+Delete 315
+Delete 300
+Delete 290
+Delete 289
+Delete 288
+Delete 287
+Delete 281
+Delete 279
+Delete 277
+Delete 266
+Delete 264
+Delete 263
+Delete 262
+Delete 249
+Delete 247
+Delete 243
+Delete 239
+Insert 223, 'g'
+Insert 210, 'g'
+Insert 209, 'a'
+Insert 208, 'c'
+Insert 206, 't'
+Insert 206, 'c'
+Delete 196
+Insert 188, 'a'
+Delete 174
+Insert 166, 'g'
+Insert 155, 'c'
+Insert 155, 'a'
+Insert 149, 't'
+Insert 130, 't'
+Insert 130, 'a'
+Insert 128, 'c'
+Insert 108, 'g'
+Delete 100
+Delete 95
+Delete 90
+Delete 81
+Insert 77, 'a'
+Insert 68, 'a'
+Insert 58, 't'
+Insert 55, 'g'
+Delete 40
+Delete 37
+Delete 35
+Delete 33
+Insert 29, 't'
+Delete 20
+Insert 11, 'c'
