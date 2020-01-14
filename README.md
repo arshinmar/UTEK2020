@@ -1,5 +1,5 @@
 # UTEK2020
-Main repository for UTEK 2020 Competition.
+Main repository for our submission to the UTEK 2020 Programming Competition. The submission received 3rd place in the competition.
 
 ### Team
 Arsh Kadakia, Sean Wu, Ben Natra, Matthew Leung
@@ -53,4 +53,22 @@ After determining the most optimal path, the output is:
 Replace 0, ‘s’
 Replace 4, ‘i’
 Insert 6, ‘g’
+```
+
+## Project Structure
+The competition was broken up into 3 parts. Each part has its own designated python file for relevant functions and its own main file to execute the code. The test input files are also provided in this repository along with our outputs.
+
+```
+├── An_Analysis_Post-Mortem.pdf
+├── README.md
+├── main1.py
+├── main2.py
+├── main3.py
+├── part1.py
+├── part2-input/
+├── part2-output/
+├── part2.py
+├── part3-input/
+├── part3.py
+└── utek2020_programming_package.pdf
 ```
