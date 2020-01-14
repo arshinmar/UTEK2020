@@ -8,8 +8,8 @@ Arsh Kadakia, Sean Wu, Ben Natra, Matthew Leung
 ### Main Problem: Arrange Books in a Library
 In a library, given the current arrangement of books, and a new desired arrangement, generate an optimal set of moves to rearrange the shelves. Allowed moves (each of equal cost) are insert, delete, and replace.
 
-### Parts
-The second part of the competition is to generate an optimal set of moves to rearrange strings (e.g. rearrange "Sunday" into "Saturday"). The third part of the competition is to generate an optimal set of moves to rearrange library shelves (main problem).
+### Parts of the Competition
+The competition consisted of three parts, which could be found in the PDF file in this repository. The second part of the competition is to generate an optimal set of moves to rearrange strings (e.g. rearrange "Sunday" into "Saturday"). The third part of the competition is to generate an optimal set of moves to rearrange library shelves (main problem).
 
 
 ## Build/Run Instructions
@@ -32,8 +32,14 @@ Download all the necessary files, and type into command line:
 4. Determine the optimal path by measuring which path has the most number of similar consecutive moves (consecutive inserts, deletes, replaces).
 5. Convert to printable syntax and output to file.
 
-### Hash Table
-When the initial input file ```<input_file>.in``` was parsed, the names of the books were placed in a hash table for quick access. Each book was assigned an integer key. Our algorithm needed to compare whether or not two books were equal, and since comparisons between integers are faster than comparisons between strings, a hash table was used.
+### ```dp``` Matrix
+Given a string ```s``` of length m, which we want to rearrange into a string ```t``` of length n, a ```dp``` matrix of size (m+1) x (n+1) would be needed. ```s``` would be placed along the column, and ```t``` would be placed along the row (see example below). Now let's say we have an index ```i``` that iterates over the rows of ```dp```, and an index ```j``` that iterates over the columns of ```dp```. Every entry ```dp[i][j]``` in ```dp``` contains the minimum number of moves required to change the first ```i``` characters of ```s``` into the first ```j``` characters of ```t```. We would start at the top left corner of the matrix, and fill it in the bottom right direction, until the entire matrix is filled. The most bottom right entry of ```dp``` would contain the minimum number of moves required to change ```s``` into ```t```.
+
+Intuitively, as we fill ```dp```, if we go from left to right, it is an insertion operation. If we go from top to bottom, it is a deletion operation. Finally if we go diagonally from an entry top left, it is a replacement operation; this is unless the ```i```th element of ```s``` is equal to the ```j```th element of ```t```, in which no operation would have been done. After filling the matrix, we can simply backtrack to determine the most optimal set of moves needed to change ```s``` into ```t```.
+
+### Identifier
+When the initial input file ```<input_file>.in``` was parsed, the names of the books were placed in a list of lists with a unique integer key (identifier) mapped to each book for quick access. Our algorithm needed to compare whether or not two books were equal, and since comparisons between integers are faster than comparisons between strings, this data structure was used. Format of the data structure:
+```[[0, book1], [1, book2], [2, book3], ...]```
 
 ### Example
 To rearrange the string ```kitten``` into ```sitting```, our model gives a corresponding ```dp``` matrix of:
@@ -55,8 +61,12 @@ Replace 4, ‘i’
 Insert 6, ‘g’
 ```
 
+### Future Improvements
+
+We noticed that not all elements of the ```dp``` matrix have to be computed. Some entries, near the top right corner or bottom left corner of the matrix would give sets of moves that are not the most optimal. In these areas of the matrix, there would be a larger set of moves, because more insertions/deletions are performed rather than replacements.
+
 ## Project Structure
-The competition was broken up into 3 parts. Each part has its own designated python file for relevant functions and its own main file to execute the code. The test input files are also provided in this repository along with our outputs.
+The competition was broken up into three parts. Each part has its own designated python file for relevant functions and its own main file to execute the code. The test input files are also provided in this repository along with our outputs.
 
 ```
 ├── An_Analysis_Post-Mortem.pdf
