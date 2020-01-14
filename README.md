@@ -33,7 +33,7 @@ Download all the necessary files, and type into command line:
 5. Convert to printable syntax and output to file.
 
 ### ```dp``` Matrix
-Given a string ```s``` of length m, which we want to rearrange into a string ```t``` of length n, a ```dp``` matrix of size (m+1) x (n+1) would be needed. ```s``` would be placed along the column, and ```t``` would be placed along the row (see example below). Now let's say we have an index ```i``` that iterates over the rows of ```dp```, and an index ```j``` that iterates over the columns of ```dp```. Every entry ```dp[i][j]``` in ```dp``` contains the minimum number of moves required to change the first ```i``` characters of ```s``` in into the first ```j``` characters of ```t```. We would start at the top left corner of the matrix, and fill it in the bottom right direction, until the entire matrix is filled. The most bottom right entry of ```dp``` would contain the minimum number of moves required to change ```s``` into ```t```.
+Given a string ```s``` of length m, which we want to rearrange into a string ```t``` of length n, a ```dp``` matrix of size (m+1) x (n+1) would be needed. ```s``` would be placed along the column, and ```t``` would be placed along the row (see example below). Now let's say we have an index ```i``` that iterates over the rows of ```dp```, and an index ```j``` that iterates over the columns of ```dp```. Every entry ```dp[i][j]``` in ```dp``` contains the minimum number of moves required to change the first ```i``` characters of ```s``` into the first ```j``` characters of ```t```. We would start at the top left corner of the matrix, and fill it in the bottom right direction, until the entire matrix is filled. The most bottom right entry of ```dp``` would contain the minimum number of moves required to change ```s``` into ```t```.
 
 Intuitively, as we fill ```dp```, if we go from left to right, it is an insertion operation. If we go from top to bottom, it is a deletion operation. Finally if we go diagonally from an entry top left, it is a replacement operation; this is unless the ```i```th element of ```s``` is equal to the ```j```th element of ```t```, in which no operation would have been done. After filling the matrix, we can simply backtrack to determine the most optimal set of moves needed to change ```s``` into ```t```.
 
@@ -63,7 +63,7 @@ Insert 6, ‘g’
 
 ### Future Improvements
 
-We noticed that not all elements of the ```dp``` matrix have to be computed. Some elements, near the top right or bottom left of the matrix would give sets of moves that are not the most optimal. In these areas of the matrix, there would be a larger set of moves, because more insertions/deletions are performed rather than replacements.
+We noticed that not all elements of the ```dp``` matrix have to be computed. Some entries, near the top right corner or bottom left corner of the matrix would give sets of moves that are not the most optimal. In these areas of the matrix, there would be a larger set of moves, because more insertions/deletions are performed rather than replacements.
 
 ## Project Structure
 The competition was broken up into three parts. Each part has its own designated python file for relevant functions and its own main file to execute the code. The test input files are also provided in this repository along with our outputs.
