@@ -2,24 +2,25 @@ Replace 0, 'r'
 Replace 1, 'i'
 Replace 2, 'n'
 Replace 3, 'o'
-Delete 7
-Delete 9
 Replace 10, 'c'
 Replace 12, 'e'
 Replace 13, 's'
 Replace 14, 't'
 Replace 15, 'a'
 Replace 16, 'm'
-Delete 18
-Delete 19
 Replace 21, 'n'
-Delete 23
 Replace 26, 'm'
-Delete 28
-Delete 29
-Delete 30
 Replace 32, 'c'
 Replace 33, 'r'
 Replace 37, 'v'
 Replace 39, 'l'
 Delete 44
+Delete 30
+Delete 29
+Delete 28
+Delete 23
+Delete 19
+Delete 18
+Delete 9
+Delete 7
+Insert 0, 't'

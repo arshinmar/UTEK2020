@@ -1,14 +1,14 @@
 Replace 0, 'g'
-Insert 2, 'o'
-Insert 3, 'c'
-Insert 4, 'i'
-Insert 5, 'b'
 Replace 5, 'o'
 Replace 9, 'l'
-Delete 14
-Delete 15
 Replace 17, 't'
 Replace 19, 'r'
 Replace 21, 'p'
-Delete 23
 Delete 28
+Delete 23
+Delete 15
+Delete 14
+Insert 2, 'b'
+Insert 2, 'i'
+Insert 2, 'c'
+Insert 2, 'o'
